@@ -1,0 +1,13 @@
+create table customers(c_id varchar(15) primary key, name varchar(50) not null, cnic varchar(15) unique not null, email varchar(45) not null, password varchar(25) not null, address varchar(150) not null);
+
+create table manufacturers(m_id varchar(15) primary key, name varchar(50) not null, cnic varchar(15) unique not null, email varchar(45) not null, password varchar(25) not null, address varchar(150) not null);
+
+create table admins(a_id varchar(15) primary key, name varchar(50) not null, cnic varchar(15) unique not null, email varchar(45) not null, password varchar(25) not null, address varchar(150) not null);
+
+create table feedbacks(c_id varchar(15) not null, rating varchar(1) not null, comment varchar(100) not null, foreign key (c_id) references customers(c_id));
+
+create table raw_materials(m_id varchar(15) primary key, name varchar(30) not null, description varchar(80) not null, unit varchar(10) not null, quantity int not null);
+
+create table products(p_id varchar(15) primary key, name varchar(30) not null, description varchar(80) not null, price varchar(10) not null);
+
+create table orders(o_id varchar(15) primary key, c_id varchar(15) not null, p_id varchar(15) not null, quantity varchar(10) not null, status varchar(25) not null default 'Pending Approval', o_time datetime default current_timestamp not null, foreign key (c_id) references customers(c_id), foreign key (p_id) references products(p_id));
